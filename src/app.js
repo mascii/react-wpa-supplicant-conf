@@ -82,7 +82,6 @@ class App extends Component {
   }
 
   downloadWPA() {
-    console.log('downloadWPA');
     if (window.navigator.msSaveBlob) {
       const fileName = 'wpa_supplicant.conf';
       window.navigator.msSaveBlob(this.constructor.makeBlob(this.state.config), fileName);
@@ -90,7 +89,6 @@ class App extends Component {
   }
 
   downloadSSH() {
-    console.log('downloadSSH');
     if (window.navigator.msSaveBlob) {
       const fileName = 'ssh.txt';
       window.navigator.msSaveBlob(this.constructor.makeBlob(''), fileName);
