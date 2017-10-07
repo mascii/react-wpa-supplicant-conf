@@ -26,8 +26,11 @@ class App extends Component {
     };
   }
 
+  componentWillMount() {
+    this.makeConfigFile(this.state.items);
+  }
+
   componentDidMount() {
-    this.makeConfigFile([]);
     this.inputSSID.focus();
   }
 
