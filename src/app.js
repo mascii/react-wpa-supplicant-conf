@@ -10,7 +10,6 @@ class App extends Component {
   static makeBlob(content) {
     return new Blob([content], { type: 'text/plain' });
   }
-
   constructor() {
     super();
 
