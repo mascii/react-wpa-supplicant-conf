@@ -107,7 +107,7 @@ class App extends Component {
     ));
     return (
       <div>
-        <form onSubmit={e => this.addItem(e)}>
+        <form onSubmit={e => this.addItem(e)} autocomplete="off">
           SSID: <input type="text" name="newSSID" ref={(input) => { this.inputSSID = input; }} />{' '}
           Passphrase: <input type="text" name="newPassphrase" />{' '}
           <button type="submit">追加</button>
