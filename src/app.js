@@ -45,11 +45,11 @@ class App extends Component {
       passphrase: newPassphrase,
       psk: newPassphrase.length !== 0 ? pbkdf2Sync(newPassphrase, newSSID, 4096, 32, 'sha1').toString('hex') : '',
     });
+    this.makeConfigFile(items);
+    this.setState({ items, count });
 
     e.target.newSSID.value = '';
     e.target.newPassphrase.value = '';
-    this.makeConfigFile(items);
-    this.setState({ items, count });
     e.target.newSSID.focus();
   }
 
