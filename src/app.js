@@ -104,7 +104,7 @@ class App extends Component {
       </li>
     ));
     return (
-      <div className="app">
+      <div>
         <form onSubmit={e => this.addItem(e)}>
           SSID: <input type="text" name="newSSID" ref={(input) => { this.inputSSID = input; }} />{' '}
           Passphrase: <input type="text" name="newPassphrase" />{' '}
