@@ -10,9 +10,9 @@ class App extends Component {
   static makeBlob(content) {
     return new Blob([content], { type: 'text/plain' });
   }
+
   constructor() {
     super();
-
     let urlSSH = '#';
     if (!window.navigator.msSaveBlob) {
       urlSSH = window.URL.createObjectURL(this.constructor.makeBlob(''));
@@ -77,6 +77,7 @@ class App extends Component {
       return network;
     }).join('\n');
     this.setState({ config });
+
     if (!window.navigator.msSaveBlob) {
       const urlWPA = window.URL.createObjectURL(this.constructor.makeBlob(config));
       this.setState({ urlWPA });
