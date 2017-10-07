@@ -105,7 +105,7 @@ class App extends Component {
     ));
     return (
       <div className="app">
-        <form name="todoform" onSubmit={e => this.addItem(e)}>
+        <form onSubmit={e => this.addItem(e)}>
           SSID: <input type="text" name="newSSID" ref={(input) => { this.inputSSID = input; }} />{' '}
           Passphrase: <input type="text" name="newPassphrase" />{' '}
           <button type="submit">追加</button>
