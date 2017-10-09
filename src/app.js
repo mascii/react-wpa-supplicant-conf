@@ -29,20 +29,20 @@ class App extends Component {
 
   constructor() {
     super();
-    let urlSSH = '#';
-    if (!window.navigator.msSaveBlob) {
-      urlSSH = window.URL.createObjectURL(this.constructor.makeBlob(''));
-    }
     this.state = {
       items: [],
       count: 0,
       urlWPA: '#',
-      urlSSH,
+      urlSSH: '#',
     };
   }
 
   componentWillMount() {
     this.updateUrlWPA(this.state.items);
+    if (!window.navigator.msSaveBlob) {
+      const urlSSH = window.URL.createObjectURL(this.constructor.makeBlob(''));
+      this.setState({ urlSSH });
+    }
   }
 
   componentDidMount() {
