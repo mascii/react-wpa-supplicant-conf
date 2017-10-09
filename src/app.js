@@ -11,6 +11,22 @@ class App extends Component {
     return new Blob([content], { type: 'text/plain' });
   }
 
+  static makeConfig(items) {
+    const config = configHeader + items.map((item) => {
+      let network = 'network={\n';
+      network += `    ssid="${item.id}"\n`;
+      if (item.psk !== '') {
+        network += `    psk=${item.psk}\n`;
+      } else {
+        network += '    key_mgmt=NONE\n';
+      }
+      network += '}';
+      return network;
+    }).join('\n');
+
+    return config;
+  }
+
   constructor() {
     super();
     let urlSSH = '#';
@@ -22,12 +38,11 @@ class App extends Component {
       count: 0,
       urlWPA: '#',
       urlSSH,
-      config: '',
     };
   }
 
   componentWillMount() {
-    this.makeConfigFile(this.state.items);
+    this.updateUrlWPA(this.state.items);
   }
 
   componentDidMount() {
@@ -48,7 +63,7 @@ class App extends Component {
       passphrase: newPassphrase,
       psk: newPassphrase.length !== 0 ? pbkdf2Sync(newPassphrase, newSSID, 4096, 32, 'sha1').toString('hex') : '',
     });
-    this.makeConfigFile(items);
+    this.updateUrlWPA(items);
     this.setState({ items, count });
 
     e.target.newSSID.value = '';
@@ -61,25 +76,13 @@ class App extends Component {
     const index = items.indexOf(item);
     items.splice(index, 1);
     this.setState({ items });
-    this.makeConfigFile(items);
+    this.updateUrlWPA(items);
   }
 
-  makeConfigFile(items) {
-    const config = configHeader + items.map((item) => {
-      let network = 'network={\n';
-      network += `    ssid="${item.id}"\n`;
-      if (item.psk !== '') {
-        network += `    psk=${item.psk}\n`;
-      } else {
-        network += '    key_mgmt=NONE\n';
-      }
-      network += '}';
-      return network;
-    }).join('\n');
-    this.setState({ config });
-
+  updateUrlWPA(items) {
     if (!window.navigator.msSaveBlob) {
-      const urlWPA = window.URL.createObjectURL(this.constructor.makeBlob(config));
+      const content = this.constructor.makeConfig(items);
+      const urlWPA = window.URL.createObjectURL(this.constructor.makeBlob(content));
       this.setState({ urlWPA });
     }
   }
@@ -87,7 +90,8 @@ class App extends Component {
   downloadWPA() {
     if (window.navigator.msSaveBlob) {
       const fileName = 'wpa_supplicant.conf';
-      window.navigator.msSaveBlob(this.constructor.makeBlob(this.state.config), fileName);
+      const content = this.constructor.makeConfig(this.state.items);
+      window.navigator.msSaveBlob(this.constructor.makeBlob(content), fileName);
     }
   }
 
