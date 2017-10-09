@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import { pbkdf2Sync } from 'pbkdf2';
 
-const configHeader = `country=JP
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-update_config=1
-`;
-
 class App extends Component {
   static makeBlob(content) {
     return new Blob([content], { type: 'text/plain' });
   }
 
   static makeConfig(items) {
-    const config = configHeader + items.map((item) => {
+    let config = 'country=JP\n';
+    config += 'ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\n';
+    config += 'update_config=1\n';
+
+    config += items.map((item) => {
       let network = 'network={\n';
       network += `    ssid="${item.id}"\n`;
       if (item.psk !== '') {
