@@ -104,16 +104,16 @@ class App extends Component {
   render() {
     const items = this.state.items.map(item => (
       <li key={item.key}>
-        SSID: {item.id},{' '}
-        Passphrase: {item.passphrase}{' '}
-        <button onClick={() => this.deleteItem(item)}>削除</button>
+        SSID: {item.id},
+        Passphrase: {item.passphrase}
+        <button onClick={() => this.deleteItem(item)} className="button-small">削除</button>
       </li>
     ));
     return (
       <div>
         <form onSubmit={e => this.addItem(e)} autoComplete="off">
-          SSID: <input type="text" name="newSSID" ref={(input) => { this.inputSSID = input; }} />{' '}
-          Passphrase: <input type="text" name="newPassphrase" />{' '}
+          SSID: <input type="text" name="newSSID" ref={(input) => { this.inputSSID = input; }} />
+          Passphrase: <input type="text" name="newPassphrase" />
           <button type="submit">追加</button>
         </form>
         <ul>
@@ -125,7 +125,7 @@ class App extends Component {
           download="wpa_supplicant.conf"
         >
           <button>wpa_supplicant.conf作成</button>
-        </a>{' '}
+        </a>
         <a
           href={this.state.urlSSH}
           onClick={() => this.downloadSSH()}

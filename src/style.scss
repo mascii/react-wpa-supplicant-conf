@@ -1,0 +1,22 @@
+$color-primary: #60B22E;
+@import '~milligram/src/milligram.sass';
+
+button {
+  text-transform: none;
+  margin: 2px;
+}
+
+.button-small {
+  font-size: .8rem;
+  height: 2.8rem;
+  line-height: 2.8rem;
+  padding: 0 1.5rem;
+}
+
+ul, form {
+  margin-bottom: 1rem;
+}
+
+li {
+  margin-bottom: 0;
+}
