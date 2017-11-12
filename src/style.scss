@@ -1,5 +1,6 @@
 $color-primary: #60B22E;
 @import '~milligram/src/milligram.sass';
+$color-rasp-red :#D6264F;
 
 button {
   text-transform: none;
@@ -13,8 +14,13 @@ button {
   padding: 0 1.5rem;
 }
 
+.button-red {
+  background-color: $color-rasp-red;
+  border: $color-rasp-red;
+}
+
 .sec-weak {
-  color: #D6264F;
+  color: $color-rasp-red;
 }
 
 ul, form {

@@ -105,7 +105,7 @@ class App extends Component {
       <li key={item.key}>
         SSID: {item.id},
         Security: <span className={(item.psk.length === 0) ? 'sec-weak' : ''}>{(item.psk.length > 0) ? 'WPA2' : 'None'}</span>
-        <button onClick={() => this.deleteItem(item)} className="button-small">削除</button>
+        <button onClick={() => this.deleteItem(item)} className="button-small button-red">削除</button>
       </li>
     ));
     return (
