@@ -14,7 +14,7 @@ class App extends Component {
     config += items.map((item) => {
       let network = 'network={\n';
       network += `    ssid="${item.id}"\n`;
-      if (item.psk !== '') {
+      if (item.psk.length > 0) {
         network += `    psk=${item.psk}\n`;
       } else {
         network += '    key_mgmt=NONE\n';
