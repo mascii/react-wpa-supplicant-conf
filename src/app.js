@@ -59,7 +59,6 @@ class App extends Component {
     const items = this.state.items.concat({
       key: count,
       id: newSSID,
-      passphrase: newPassphrase,
       psk: newPassphrase.length !== 0 ? pbkdf2Sync(newPassphrase, newSSID, 4096, 32, 'sha1').toString('hex') : '',
     });
     this.updateUrlWPA(items);
@@ -105,7 +104,7 @@ class App extends Component {
     const items = this.state.items.map(item => (
       <li key={item.key}>
         SSID: {item.id},
-        Passphrase: {item.passphrase}
+        Security: <span className={(item.psk.length === 0) ? 'sec-weak' : ''}>{(item.psk.length > 0) ? 'WPA2' : 'None'}</span>
         <button onClick={() => this.deleteItem(item)} className="button-small">削除</button>
       </li>
     ));
@@ -113,7 +112,7 @@ class App extends Component {
       <div>
         <form onSubmit={e => this.addItem(e)} autoComplete="off">
           SSID: <input type="text" name="newSSID" ref={(input) => { this.inputSSID = input; }} />
-          Passphrase: <input type="text" name="newPassphrase" />
+          Passphrase: <input type="password" name="newPassphrase" />
           <button type="submit">追加</button>
         </form>
         <ul>
