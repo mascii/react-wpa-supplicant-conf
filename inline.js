@@ -1,5 +1,9 @@
-const inline = require('inline-source').sync;
+const { inlineSource } = require('inline-source');
 const fs = require('fs');
 
-const html = inline('./index.html', { compress: false });
-fs.writeFileSync('./dist/index.html', html);
+inlineSource('./index.html', {
+  compress: false
+})
+.then(html => {
+  fs.writeFileSync('./dist/index.html', html);
+});
